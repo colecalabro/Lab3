@@ -1,0 +1,96 @@
+/******************************************************************************
+
+AUTHOR:         Cole Calabro
+FILENAME:       Lab3.c
+SPECIFICATION:  Calculating Weekly Pay    
+FOR:            CS 1412 Programming Principles II 201
+
+*******************************************************************************/
+#include <stdio.h>
+#include <stdlib.h>
+ 
+int main (void) {
+    
+    enum payroll_type{
+        Manager = 1,
+        Hourly = 2, 
+        Commission = 3,
+        Piece = 4,
+    };
+
+   /* local variable definition */
+    int paycode;
+    int managers_paid = 0, hourly_paid = 0, commissions_paid = 0, piece_paid = 0;
+    // manager variables
+    double manager_salary;
+    // hourly variables
+    double hourly_pay, hourly_week;
+    int hours_worked;
+    // commission variables
+    double weekly_sales, commission_week;
+    //piece variables
+    int items_made;
+    double pay_per_item, piece_week;
+    
+    int quit = 0;
+    while(!quit)
+        printf("Enter paycode ( 0 to end ): ");
+        scanf("%d", &paycode);
+    
+        switch(paycode) {
+            case Manager :
+                printf("Manager Selected.\n" );
+                printf("Enter weekly salary: ");
+                scanf("%lf", &manager_salary);
+                printf("The manager's pay is $%0.2lf\n", manager_salary);
+                break;
+            case Hourly :
+                printf("Hourly Worker Selected\n" );
+                printf("Enter hourly pay: ");
+                scanf("%lf", &hourly_pay);
+                printf("Enter hours worked: ");
+                scanf("%d", &hours_worked);
+                if(hours_worked > 40){
+                    hourly_week = hourly_pay * 40 + (hourly_pay * 1.5 * (hours_worked - 40));
+                    printf("The hourly worker's pay is $%0.2lf\n", hourly_week);
+                }
+                else
+                    hourly_week = hours_worked * hourly_pay;
+                    printf("The hourly worker's pay is $%0.2lf\n", hourly_week);
+                
+                break;
+            case Commission :
+                printf("Commission Worker Selected\n" );
+                printf("Eneter weekly sales total: ");
+                scanf("%lf", &weekly_sales);
+                commission_week = 250 + (0.057 * weekly_sales);
+                printf("The commission worker's pay is $%0.2lf\n", commission_week);
+                break;
+            case Piece :
+                printf("Piece Worker Selected\n" );
+                printf("Enter number of items made: ");
+                scanf("%d", &items_made);
+                printf("Enter pay per item: ");
+                scanf("%lf", &pay_per_item);
+                piece_week = items_made * pay_per_item;
+                printf("the piece worker's pay is $%0.2lf\n", piece_week);
+                break;
+            case 0 :
+                printf("Total number of managers paid           : %d\n", managers_paid);
+                printf("Total number of hourly workers paid     : %d\n", hourly_paid);
+                printf("Total number of commission workers paid : %d\n", commissions_paid);
+                printf("Total number of piece workers paid      : %d\n", piece_paid);
+                system("PAUSE");
+                quit = 1;
+                break;
+            default :
+                printf("Invalid paycode ( 0 to end )\n" );
+                break;
+       }
+       
+       printf("Your paycode is  %d\n", paycode );
+     
+       return 0;
+    }
+  
+
